@@ -62,3 +62,9 @@
     align-items: center;
     justify-content: center;
 }
+
+.hero-right img {
+    margin-top: 150px;
+    width: 90%;
+    height: auto;
+}
