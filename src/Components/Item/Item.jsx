@@ -1,24 +1,40 @@
-import React from 'react'
-import './Item.css'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import './Item.css';
+import { Link } from 'react-router-dom';
 
-const Item = (props) => {
+const Item = ({ productId }) => {
+    const [product, setProduct] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`https://js2-ecommerce-api.vercel.app/api/products/${productId}`);
+                const data = await response.json();
+                setProduct(data);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+
+        fetchData();
+    }, [productId]);
+
+    // If product is not found, return null or some placeholder
+    if (!product) {
+        return null; // or a loading spinner, or some other placeholder
+    }
+
+    const { _id, name, images } = product;
+
     return (
-        <div className='item'>
-            <Link to={`/product/${props.id}`}><img onClick={window.scrollTo(0, 0)} src={props.image} alt="" /></Link>
-            <p>{props.name}</p>
-            <div className="item-prices">
-                <div className="item-price-new">
-                    Kr{props.new_price}
-
-                </div>
-                <div className="item-price-old">
-                    Kr{props.old_price}
-                </div>
-
+        <Link to={`/product/${_id}`} className="product-link" onClick={() => window.scrollTo(0, 0)}>
+            <div className='item'>
+                <img src={Array.isArray(images) ? images[0] : images} alt="" />
+                <h2>{product.name}</h2>
+                <p>{product.price} Kr</p>
             </div>
-        </div>
-    )
+        </Link>
+    );
 }
 
-export default Item
+export default Item;

@@ -1,20 +1,35 @@
-import React from 'react'
-import './Popular.css'
-import data_product from '../Assets/data'
-import Item from '../Item/Item'
+import React, { useContext } from 'react';
+import Item from '../Item/Item';
+import { ShopContext } from '../../Context/ShopContext';
+import './Popular.css';
 
 const Popular = () => {
+    const { products } = useContext(ShopContext);
+
+    // Select only the first 5 products
+    const displayedProducts = products.slice(0, 6);
+
     return (
         <div className='popular'>
-            <h1>POPULAR IN WOMEN</h1>
+            <h1>POPULAR</h1>
             <hr />
             <div className="popular-item">
-                {data_product.map((item, i) => {
-                    return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} />
+                {displayedProducts.map(product => {
+                    const imageUrls = Array.isArray(product.images) ? product.images : product.images.split(',');
+                    console.log(imageUrls);
+
+                    return (
+                        <div key={product._id}>
+                            <Item productId={product._id} />
+
+
+
+                        </div>
+                    );
                 })}
             </div>
         </div>
-    )
+    );
 }
 
-export default Popular
+export default Popular;

@@ -1,14 +1,13 @@
-// src/components/navbar/Navbar.jsx
-import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css'; // Import your CSS file here
-import logo from '../Assets/logo.png';
-import cart_icon from '../Assets/cart_icon.png';
-import { ShopContext } from '../../Context/ShopContext';
+import React, { useContext } from 'react'
+import './Navbar.css'
+import { Link } from 'react-router-dom'
+import logo from '../Assets/logo.png'
+import cart_icon from '../Assets/cart_icon.png'
+import { ShopContext } from '../../Context/ShopContext'
 
 const Navbar = () => {
-    const [menu, setMenu] = useState("shop");
     const { GetTotalCartItems } = useContext(ShopContext);
+    const [menu, setMenu] = React.useState("shop");
 
     return (
         <div className='navbar'>

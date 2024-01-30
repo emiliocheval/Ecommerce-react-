@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom'; // Import useHistory
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './CSS/LoginSignup.css'; // Import your CSS file
 
 function LoginSignup() {
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
     const [isSignup, setIsSignup] = useState(false);
-    const history = useHistory(); // Initialize useHistory
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const onSubmit = async (data) => {
         if (isSignup) {
@@ -27,7 +27,7 @@ function LoginSignup() {
                 const result = await response.json();
                 console.log(result);
                 // Redirect to login page
-                history.push('/login');
+                navigate('/login');
             } else if (response.status === 400) {
                 // handle bad request
                 console.error('Bad request');
@@ -55,7 +55,7 @@ function LoginSignup() {
                 // Store the token in local storage or a cookie
                 localStorage.setItem('token', token);
                 // Redirect to the main application page
-                history.push('/');
+                navigate('/');
             } else if (response.status === 400) {
                 // handle bad request
                 console.error('Bad request');
