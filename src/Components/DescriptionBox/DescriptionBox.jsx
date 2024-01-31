@@ -1,19 +1,17 @@
-import React from 'react'
-import './DescriptionBox.css'
+import React from 'react';
+import './DescriptionBox.css';
 
-const DescriptionBox = () => {
+const DescriptionBox = ({ description }) => {
     return (
         <div className='descriptionbox'>
             <div className="descriptionbox-navigator">
                 <div className="descriptionbox-nav-box">Description</div>
-                <div className="descriptionbox-nav-box fade">Reviews (122)</div>
             </div>
             <div className="descriptionbox-description">
-                <p>An e-commerce website is an online platform that facilitate blablabla</p>
-                <p>It is a type of website that allows you to buy and sell products or services using the internet.</p>
+                <p>{description}</p>
             </div>
         </div>
-    )
+    );
 }
 
-export default DescriptionBox
+export default DescriptionBox;

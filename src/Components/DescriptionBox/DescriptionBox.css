@@ -1,20 +1,31 @@
-.descriptionbox {
-    margin: 120px 170px;
-}
-
-.descriptionbox-navigator {
-    display: flex;
-}
-
+/* Updated descriptionbox-nav-box styles */
 .descriptionbox-nav-box {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 16px;
     font-weight: 600;
-    width: 171px;
+    width: 100%;
+    /* Take full width */
     height: 70px;
     border: 1px solid #d0d0d0;
+    box-sizing: border-box;
+    /* Include padding and border in the total width/height */
+}
+
+/* Keep the rest of the descriptionbox styles unchanged */
+.descriptionbox {
+    width: 100%;
+    max-width: 650px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #d0d0d0;
+    box-sizing: border-box;
+
+}
+
+.descriptionbox-navigator {
+    display: flex;
 }
 
 .descriptionbox-nav-box.fade {
@@ -26,7 +37,5 @@
     display: flex;
     flex-direction: column;
     gap: 25px;
-    border: 1px solid #d0d0d0;
-    padding: 48px;
-    padding-bottom: 70px;
+
 }
