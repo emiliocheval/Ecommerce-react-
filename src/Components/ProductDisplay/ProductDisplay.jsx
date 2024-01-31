@@ -33,13 +33,14 @@ const ProductDisplay = () => {
                 <div className="productdisplay-main">
                     <img className='productdisplay-main-img' src={imageSrc[0]} alt="" />
                     <h1>{product.name}</h1>
-                    <p>{product.price}KR</p>
-                    {/* Use the DescriptionBox component */}
-                    <DescriptionBox description={product.description} />
-                </div>
-            </div>
-            <div className="productdisplay-right">
+                    <p>{product.price} KR</p>
+                    <div className="productdisplay-button">
+                        <button onClick={() => { addToCart(product._id) }}>ADD TO CART</button>
 
+                    </div>
+                    <DescriptionBox description={product.description} />
+
+                </div>
             </div>
         </div>
     );

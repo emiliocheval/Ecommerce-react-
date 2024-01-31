@@ -11,8 +11,8 @@ const ShopContextProvider = (props) => {
             try {
                 const response = await fetch('https://js2-ecommerce-api.vercel.app/api/products');
                 const data = await response.json();
+                console.log('Products:', data);
                 setProducts(data);
-                setCartItems(getDefaultCart(data));
             } catch (error) {
                 console.error('Error:', error);
             }
@@ -21,48 +21,64 @@ const ShopContextProvider = (props) => {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        console.log('Updated Cart Items:', cartItems);
+    }, [cartItems]);
+
+    // Set default cart items after products have been updated
+    useEffect(() => {
+        setCartItems(getDefaultCart(products));
+    }, [products]);
+
+    useEffect(() => {
+        console.log('Recalculating Total Amount...');
+        // Recalculate total amount whenever cartItems or products change
+        const totalAmount = getTotalCartAmount();
+        console.log('Total Amount:', totalAmount);
+    }, [cartItems, products]);
+
     const getDefaultCart = (products) => {
         let cart = {};
-        for (let index = 0; index < products.length + 1; index++) {
-            cart[index] = 0;
+        for (let index = 0; index < products.length; index++) {
+            cart[products[index]._id] = 0;
         }
-
         return cart;
-    }
+    };
 
     const addToCart = (itemId) => {
         setCartItems((prev) => ({
-            ...prev, [itemId]: prev[itemId] + 1
+            ...prev,
+            [itemId]: (prev[itemId] || 0) + 1,
         }));
-        console.log(cartItems);
-    }
+    };
 
     const removeFromCart = (itemId) => {
         setCartItems((prev) => ({
-            ...prev, [itemId]: prev[itemId] - 1
+            ...prev,
+            [itemId]: Math.max(0, (prev[itemId] || 0) - 1),
         }));
-    }
+    };
 
     const getTotalCartAmount = () => {
         let totalAmount = 0;
-        for (const item in cartItems) {
-            if (cartItems[item] > 0) {
-                let itemInfo = products.find((product) => product.id === Number(item))
-                totalAmount += itemInfo.new_price * cartItems[item]
+        for (const itemId in cartItems) {
+            const product = products.find(product => product._id === itemId);
+            if (product) {
+                totalAmount += product.price * cartItems[itemId];
             }
         }
-        return totalAmount
-    }
+        return totalAmount;
+    };
 
     const GetTotalCartItems = () => {
         let totalItem = 0;
         for (const item in cartItems) {
             if (cartItems[item] > 0) {
-                totalItem += cartItems[item]
+                totalItem += cartItems[item];
             }
         }
-        return totalItem
-    }
+        return totalItem;
+    };
 
     const contextValue = { GetTotalCartItems, getTotalCartAmount, products, cartItems, addToCart, removeFromCart };
 
@@ -71,6 +87,6 @@ const ShopContextProvider = (props) => {
             {props.children}
         </ShopContext.Provider>
     );
-}
+};
 
 export default ShopContextProvider;

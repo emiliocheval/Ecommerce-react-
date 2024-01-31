@@ -11,34 +11,35 @@ const CartItems = () => {
             <div className="cartitems-format-main">
                 <p>Products</p>
                 <p>Title</p>
-                <p>Price</p>
                 <p>Quantity</p>
                 <p>Total</p>
                 <p>Remove</p>
             </div>
             <hr />
-            {products.map((e) => {
-                if (cartItems[e.id] > 0) {
+            {products.map((product) => {
+                const quantity = cartItems[product._id] || 0; // Get quantity based on product ID
+                if (quantity > 0) {
                     return (
-                        <div key={e.id}>
+                        <div key={product._id}>
                             <div className="cartitems-format cartitems-format-main">
-                                <img src={e.image} alt="" className='carticon-product-icon' />
-                                <p>{e.name}</p>
-                                <p>${e.new_price}</p>
-                                <p>{cartItems[e.id]}</p>
-                                <p>${e.new_price * cartItems[e.id]}</p>
-                                <img src={remove_icon} alt="" className='carticon-cross-icon' onClick={() => removeFromCart(e.id)} />
+                                <img src={product.images[0]} alt={product.name} className='carticon-product-icon' />
+
+                                <p>{product.name}</p>
+                                <p>{quantity}</p>
+                                <p>{product.price * quantity} KR</p>
+                                <img src={remove_icon} alt="" className='carticon-cross-icon' onClick={() => removeFromCart(product._id)} />
                             </div>
-                            <hr />
+                            <hr key={`hr_${product._id}`} />
                         </div>
-                    )
+                    );
                 }
+
                 return null;
             })}
             <div className="cartitems-total">
                 <div className="cartitems-total-item">
                     <p>Subtotal</p>
-                    <p>${getTotalCartAmount()}</p>
+                    <p>{getTotalCartAmount()} KR</p>
                 </div>
                 <hr />
                 <div className="cartitems-total-item">
@@ -48,7 +49,7 @@ const CartItems = () => {
                 <hr />
                 <div className="cartitems-total-item">
                     <h3>Total</h3>
-                    <h3>${getTotalCartAmount()}</h3>
+                    <h3>{getTotalCartAmount()} KR</h3>
                 </div>
                 <button>PROCEED TO CHECKOUT</button>
             </div>
