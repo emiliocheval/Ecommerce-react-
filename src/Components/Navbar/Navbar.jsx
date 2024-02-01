@@ -12,11 +12,12 @@ const Navbar = () => {
     return (
         <div className='navbar'>
             <div className="nav-logo">
-                <img src={logo} alt="" />
-                <p>SHOPPER</p>
+
+                <p>INKOMPLETT</p>
             </div>
             <ul className="nav-menu">
-                <li onClick={() => { setMenu("shop") }}><Link style={{ textDecoration: 'none' }} to='/'>Shop</Link>{menu === "shop" ? <hr /> : <></>}</li>
+                <li onClick={() => { setMenu("shop") }}><Link style={{ textDecoration: 'none' }} to='/'>HOME</Link>{menu === "shop" ? <hr /> : <></>}</li>
+                <li onClick={() => { setMenu("shop") }}><Link style={{ textDecoration: 'none' }} to='/contact'>CONTACT</Link>{menu === "shop" ? <hr /> : <></>}</li>
 
             </ul>
             <div className="nav-login-cart">

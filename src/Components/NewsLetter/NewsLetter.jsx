@@ -4,11 +4,11 @@ import './NewsLetter.css'
 const NewsLetter = () => {
     return (
         <div className='newsletter'>
-            <h1>Get exclusive offers on your email</h1>
-            <p>subscribe to our newletters</p>
+            <h1>Contact Us</h1>
+
             <div>
-                <input type="email" placeholder='Your Email id' />
-                <button>Subscribe</button>
+
+                <button></button>
             </div>
         </div>
     )
