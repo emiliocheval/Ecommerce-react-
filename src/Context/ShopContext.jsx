@@ -25,7 +25,9 @@ const ShopContextProvider = (props) => {
     }, [products]);
 
     useEffect(() => {
+
         const totalAmount = getTotalCartAmount();
+        console.log('Total Amount:', totalAmount);
     }, [cartItems, products]);
 
     const getDefaultCart = (products) => {
@@ -35,6 +37,7 @@ const ShopContextProvider = (props) => {
         }
         return cart;
     };
+
 
     const addToCart = (itemId) => {
         setCartItems((prev) => ({
@@ -51,19 +54,24 @@ const ShopContextProvider = (props) => {
     };
 
     const clearCart = () => {
-        setCartItems(getDefaultCart(products));
+        setCartItems(prev => {
+            const newCart = getDefaultCart(products);
+            return newCart;
+        });
     };
+
 
     const getTotalCartAmount = () => {
         let totalAmount = 0;
-        for (const itemId in cartItems) {
-            const product = products.find(product => product._id === itemId);
+        for (const productId in cartItems) {
+            const product = products.find(product => product._id === productId);
             if (product) {
-                totalAmount += product.price * cartItems[itemId];
+                totalAmount += product.price * cartItems[productId];
             }
         }
         return totalAmount;
     };
+
 
     const GetTotalCartItems = () => {
         let totalItem = 0;
