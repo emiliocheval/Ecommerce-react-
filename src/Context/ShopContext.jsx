@@ -1,3 +1,5 @@
+// shopcontext.jsx
+
 import React, { createContext, useState, useEffect } from 'react';
 
 export const ShopContext = createContext(null);
@@ -11,7 +13,6 @@ const ShopContextProvider = (props) => {
             try {
                 const response = await fetch('https://js2-ecommerce-api.vercel.app/api/products');
                 const data = await response.json();
-                console.log('Products:', data);
                 setProducts(data);
             } catch (error) {
                 console.error('Error:', error);
@@ -22,19 +23,11 @@ const ShopContextProvider = (props) => {
     }, []);
 
     useEffect(() => {
-        console.log('Updated Cart Items:', cartItems);
-    }, [cartItems]);
-
-    // Set default cart items after products have been updated
-    useEffect(() => {
         setCartItems(getDefaultCart(products));
     }, [products]);
 
     useEffect(() => {
-        console.log('Recalculating Total Amount...');
-        // Recalculate total amount whenever cartItems or products change
         const totalAmount = getTotalCartAmount();
-        console.log('Total Amount:', totalAmount);
     }, [cartItems, products]);
 
     const getDefaultCart = (products) => {
@@ -59,6 +52,10 @@ const ShopContextProvider = (props) => {
         }));
     };
 
+    const clearCart = () => {
+        setCartItems(getDefaultCart(products));
+    };
+
     const getTotalCartAmount = () => {
         let totalAmount = 0;
         for (const itemId in cartItems) {
@@ -80,7 +77,7 @@ const ShopContextProvider = (props) => {
         return totalItem;
     };
 
-    const contextValue = { GetTotalCartItems, getTotalCartAmount, products, cartItems, addToCart, removeFromCart };
+    const contextValue = { GetTotalCartItems, getTotalCartAmount, products, cartItems, addToCart, removeFromCart, clearCart };
 
     return (
         <ShopContext.Provider value={contextValue}>

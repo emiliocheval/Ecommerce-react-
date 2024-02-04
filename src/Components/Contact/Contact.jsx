@@ -1,18 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import './Contact.css';
 
 const Contact = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [confirmation, setConfirmation] = useState(null);
 
-    const onSubmit = async (data) => {
-        // Handle form submission logic
+    const onSubmit = async (data, e) => {
+
         console.log(data);
 
-        // For demonstration purposes, assume successful form submission
+
         setConfirmation('Message Sent!');
+
+
+        e.target.reset();
     };
+
+
+    useEffect(() => {
+        if (confirmation) {
+            const timerId = setTimeout(() => {
+                setConfirmation(null);
+            }, 5000);
+
+            return () => clearTimeout(timerId);
+        }
+    }, [confirmation]);
 
     return (
         <div className='contact-container'>
@@ -53,9 +67,14 @@ const Contact = () => {
                     />
                     {errors.message && <p className='contact-error'>{errors.message.message}</p>}
                 </label>
-                <button type='submit' className='contact-button'>Skicka</button>
+                <button type='submit' className='contact-button'>SEND</button>
+                {confirmation && (
+                    <div className='confirmation-message'>
+                        <p>{confirmation}</p>
+                    </div>
+                )}
             </form>
-            {confirmation && <p>{confirmation}</p>}
+
         </div>
     );
 };

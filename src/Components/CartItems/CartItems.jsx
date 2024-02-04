@@ -1,10 +1,12 @@
+// CartItems.jsx
+
 import React, { useContext } from 'react';
 import './CartItems.css';
 import { ShopContext } from '../../Context/ShopContext';
 import remove_icon from '../Assets/cart_cross_icon.png';
 
 const CartItems = () => {
-    const { getTotalCartAmount, products, cartItems, removeFromCart } = useContext(ShopContext);
+    const { getTotalCartAmount, products, cartItems, removeFromCart, clearCart } = useContext(ShopContext);
 
     return (
         <div className='cartitems'>
@@ -51,14 +53,8 @@ const CartItems = () => {
                     <h3>Total</h3>
                     <h3>{getTotalCartAmount()} KR</h3>
                 </div>
-                <button>PROCEED TO CHECKOUT</button>
-            </div>
-            <div className="cartitems-promocode">
-                <p>Enter Promo Code</p>
-                <div className="cartitems-promobox">
-                    <input type="text" placeholder='promo code' />
-                    <button>Submit</button>
-                </div>
+                <button onClick={clearCart}>Clear Cart</button>
+                <button>PROCEED</button>
             </div>
         </div>
     );

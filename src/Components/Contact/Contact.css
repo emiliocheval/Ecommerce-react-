@@ -60,17 +60,6 @@
     margin-top: 30px;
 }
 
-.contact-login-link {
-    margin-top: 20px;
-    color: #5c5c5c;
-    font-size: 18px;
-    font-weight: 500;
-}
-
-.contact-login-link span {
-    color: #777474;
-    font-weight: 600;
-}
 
 .contact-agree-section {
     display: flex;
@@ -80,4 +69,9 @@
     color: #5c5c5c;
     font-size: 18px;
     font-weight: 500;
+}
+
+.confirmation-message {
+    margin-top: 30px;
+    /* Adjust the margin as needed */
 }
