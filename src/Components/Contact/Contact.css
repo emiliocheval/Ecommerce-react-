@@ -1,5 +1,3 @@
-/* Contact.css */
-
 .contact-container {
     text-align: center;
 }
@@ -52,7 +50,7 @@
     margin-top: 5px;
 }
 
-/* Additional styles for spacing and alignment */
+
 .contact-form .contact-label {
     display: flex;
     flex-direction: column;
@@ -73,5 +71,5 @@
 
 .confirmation-message {
     margin-top: 30px;
-    /* Adjust the margin as needed */
+
 }

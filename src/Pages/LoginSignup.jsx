@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import './CSS/LoginSignup.css'; // Import your CSS file
+import { useNavigate } from 'react-router-dom';
+import './CSS/LoginSignup.css';
 
 function LoginSignup() {
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
     const [isSignup, setIsSignup] = useState(false);
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         if (isSignup) {
-            // handle signup
+
             const response = await fetch('https://js2-ecommerce-api.vercel.app/api/auth/register', {
                 method: 'POST',
                 headers: {
@@ -26,17 +26,17 @@ function LoginSignup() {
             if (response.status === 201) {
                 const result = await response.json();
                 console.log(result);
-                // Redirect to login page
+
                 navigate('/login');
             } else if (response.status === 400) {
-                // handle bad request
+
                 console.error('Bad request');
             } else {
-                // handle other errors
+
                 console.error('Registration failed');
             }
         } else {
-            // handle login
+
             const response = await fetch('https://js2-ecommerce-api.vercel.app/api/auth/login', {
                 method: 'POST',
                 headers: {
@@ -50,20 +50,20 @@ function LoginSignup() {
 
             if (response.status === 200) {
                 const result = await response.json();
-                const token = result.token; // The property might have a different name depending on your API
+                const token = result.token;
                 console.log(token);
-                // Store the token in local storage or a cookie
+
                 localStorage.setItem('token', token);
-                // Redirect to the main application page
+
                 navigate('/');
             } else if (response.status === 400) {
-                // handle bad request
+
                 console.error('Bad request');
             } else if (response.status === 401) {
-                // handle unauthorized
+
                 console.error('Unauthorized');
             } else {
-                // handle other errors
+
                 console.error('Login failed');
             }
         }

@@ -8,7 +8,7 @@ const Popular = () => {
     const { products, selectProduct } = useContext(ShopContext);
     const navigate = useNavigate();
 
-    // Select only the first 5 products
+
     const displayedProducts = products.slice(0, 6);
 
     const handleProductClick = (product) => {

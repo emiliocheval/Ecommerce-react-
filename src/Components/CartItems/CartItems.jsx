@@ -1,5 +1,3 @@
-// CartItems.jsx
-
 import React, { useContext } from 'react';
 import './CartItems.css';
 import { ShopContext } from '../../Context/ShopContext';
@@ -19,7 +17,7 @@ const CartItems = () => {
             </div>
             <hr />
             {products.map((product) => {
-                const quantity = cartItems[product._id] || 0; // Get quantity based on product ID
+                const quantity = cartItems[product._id] || 0;
                 if (quantity > 0) {
                     return (
                         <div key={product._id}>
@@ -53,7 +51,7 @@ const CartItems = () => {
                     <h3>Total</h3>
                     <h3>{getTotalCartAmount()} KR</h3>
                 </div>
-                <button onClick={clearCart}>Clear Cart</button>
+                <button onClick={clearCart}>CLEAR CART</button>
                 <button>PROCEED</button>
             </div>
         </div>

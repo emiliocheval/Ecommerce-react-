@@ -1,5 +1,3 @@
-// shopcontext.jsx
-
 import React, { createContext, useState, useEffect } from 'react';
 
 export const ShopContext = createContext(null);

@@ -34,7 +34,6 @@
     display: flex;
     flex-direction: column;
     margin-top: 20px;
-    /* Add margin to separate from productdisplay-main */
 }
 
 .productdisplay-right h1 {
@@ -43,14 +42,6 @@
     color: #3d3d3d;
 }
 
-.productdisplay-right-stars {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    margin-top: 13px;
-    color: #1c1c1c;
-    font-size: 16px;
-}
 
 .productdisplay-right-prices {
     display: flex;
@@ -58,25 +49,6 @@
     gap: 30px;
     font-size: 24px;
     font-weight: 700;
-}
-
-.productdisplay-right-size h1 {
-    margin-top: 55px;
-    color: #656565;
-}
-
-.productdisplay-right-size {
-    display: flex;
-    margin: 30px 0px;
-    gap: 20px;
-}
-
-.productdisplay-right-size div {
-    padding: 18px 24px;
-    background: #fbfbfb;
-    border: 1px solid #ebebeb;
-    border-radius: 3px;
-    cursor: pointer;
 }
 
 .productdisplay-button button {
@@ -90,12 +62,4 @@
     outline: none;
     cursor: pointer;
     margin-top: 10px;
-}
-
-.productdisplay-right-category {
-    margin-top: 10px;
-}
-
-.productdisplay-right-category span {
-    font-weight: 600;
 }

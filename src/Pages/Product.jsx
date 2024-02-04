@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import ProductDisplay from '../Components/ProductDisplay/ProductDisplay';
-import DescriptionBox from '../Components/DescriptionBox/DescriptionBox'; // Correct import statement
 
 import { ShopContext } from '../Context/ShopContext';
 
@@ -13,7 +12,6 @@ const Product = () => {
     return (
         <div>
             <ProductDisplay />
-
         </div>
     );
 }

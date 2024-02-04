@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './ProductDisplay.css';
-import star_icon from '../Assets/star_icon.png';
-import star_dull_icon from '../Assets/star_dull_icon.png';
 import { ShopContext } from '../../Context/ShopContext';
-import DescriptionBox from '../DescriptionBox/DescriptionBox'; // Import DescriptionBox component
+import DescriptionBox from '../DescriptionBox/DescriptionBox';
 
 const ProductDisplay = () => {
     const { productId } = useParams();

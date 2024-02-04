@@ -19,9 +19,9 @@ const Item = ({ productId }) => {
         fetchData();
     }, [productId]);
 
-    // If product is not found, return null or some placeholder
+
     if (!product) {
-        return null; // or a loading spinner, or some other placeholder
+        return null;
     }
 
     const { _id, name, images } = product;
