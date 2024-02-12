@@ -25,7 +25,6 @@ const ShopContextProvider = (props) => {
     }, [products]);
 
     useEffect(() => {
-
         const totalAmount = getTotalCartAmount();
         console.log('Total Amount:', totalAmount);
     }, [cartItems, products]);
@@ -37,7 +36,6 @@ const ShopContextProvider = (props) => {
         }
         return cart;
     };
-
 
     const addToCart = (itemId) => {
         setCartItems((prev) => ({
@@ -54,12 +52,8 @@ const ShopContextProvider = (props) => {
     };
 
     const clearCart = () => {
-        setCartItems(prev => {
-            const newCart = getDefaultCart(products);
-            return newCart;
-        });
+        setCartItems(getDefaultCart(products));
     };
-
 
     const getTotalCartAmount = () => {
         let totalAmount = 0;
@@ -70,6 +64,38 @@ const ShopContextProvider = (props) => {
             }
         }
         return totalAmount;
+    };
+
+    const sendCartProductsToAPI = async () => {
+        try {
+            const cartProducts = Object.keys(cartItems)
+                .filter(itemId => cartItems[itemId] > 0)
+                .map(itemId => {
+                    return {
+                        productId: itemId,
+                        quantity: cartItems[itemId]
+                    };
+                });
+
+            const response = await fetch('https://js2-ecommerce-api.vercel.app/api/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ products: cartProducts })
+            });
+
+            if (response.ok) {
+                console.log('Order created successfully');
+
+                const responseData = await response.json();
+                console.log('Response:', responseData);
+            } else {
+                throw new Error('Failed to create order');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
 
@@ -83,7 +109,16 @@ const ShopContextProvider = (props) => {
         return totalItem;
     };
 
-    const contextValue = { GetTotalCartItems, getTotalCartAmount, products, cartItems, addToCart, removeFromCart, clearCart };
+    const contextValue = {
+        getTotalCartAmount,
+        sendCartProductsToAPI,
+        products,
+        cartItems,
+        addToCart,
+        removeFromCart,
+        clearCart,
+        GetTotalCartItems
+    };
 
     return (
         <ShopContext.Provider value={contextValue}>

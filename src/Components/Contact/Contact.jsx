@@ -7,15 +7,34 @@ const Contact = () => {
     const [confirmation, setConfirmation] = useState(null);
 
     const onSubmit = async (data, e) => {
+        try {
+            const response = await fetch('https://js2-ecommerce-api.vercel.app/api/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
 
-        console.log(data);
+            if (response.ok) {
 
+                setConfirmation('Message Sent!');
 
-        setConfirmation('Message Sent!');
+                console.log('Message sent:', data);
 
+                reset();
+            } else {
 
-        e.target.reset();
+                throw new Error('Failed to send message');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+
+            setConfirmation('Failed to send message. Please try again later.');
+        }
     };
+
+
 
 
     useEffect(() => {
